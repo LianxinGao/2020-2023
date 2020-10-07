@@ -9,7 +9,8 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>多线程</module>
+        <module>Thread</module>
+        <module>DataStructure</module>
     </modules>
 
 
