@@ -12,3 +12,10 @@ Linux/Unix的文件调用权限分三级：owner、group、other group
     
 ### 查看相关
 1. ll -h  查看当前目录文件大小与权限
+
+### 后台运行
+1. nohup  
+```
+nohup path-to-your-script > your-log.log 2>&1 &  
+>:重定向，2：错误输出，&1标准输出
+```
