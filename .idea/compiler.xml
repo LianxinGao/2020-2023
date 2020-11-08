@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="DataStructure" />
+        <module name="Database" />
         <module name="多线程" />
         <module name="Thread" />
         <module name="数据结构" />
