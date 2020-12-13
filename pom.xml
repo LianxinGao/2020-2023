@@ -12,6 +12,7 @@
         <module>Thread</module>
         <module>DataStructure</module>
         <module>Database</module>
+        <module>Rpc</module>
     </modules>
 
 
