@@ -9,44 +9,85 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>Rpc</artifactId>
+    <artifactId>rpc</artifactId>
 
-<!--    <properties>-->
-<!--        <java.version>1.8</java.version>-->
-<!--        <grpc.version>1.29.0</grpc.version>-->
-<!--        <protobuf.version>3.11.0</protobuf.version>-->
-<!--    </properties>-->
-<dependencies>
-    <dependency>
-        <groupId>org.grapheco</groupId>
-        <artifactId>hippo-rpc</artifactId>
-        <version>0.1.2</version>
-    </dependency>
+    <properties>
+        <java.version>1.8</java.version>
+        <grpc.version>1.29.0</grpc.version>
+        <protobuf.version>3.11.0</protobuf.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-netty-shaded</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-protobuf</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-stub</artifactId>
+            <version>${grpc.version}</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.netty/netty-all -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.42.Final</version>
+        </dependency>
 
-<!--    <dependency>-->
-<!--        <groupId>io.grpc</groupId>-->
-<!--        <artifactId>grpc-netty-shaded</artifactId>-->
-<!--        <version>${grpc.version}</version>-->
-<!--    </dependency>-->
+    </dependencies>
 
-<!--    <dependency>-->
-<!--        <groupId>io.grpc</groupId>-->
-<!--        <artifactId>grpc-protobuf</artifactId>-->
-<!--        <version>${grpc.version}</version>-->
-<!--    </dependency>-->
+    <build>
 
-<!--    <dependency>-->
-<!--        <groupId>io.grpc</groupId>-->
-<!--        <artifactId>grpc-stub</artifactId>-->
-<!--        <version>${grpc.version}</version>-->
-<!--    </dependency>-->
+        <extensions>
+            <extension>
+                <groupId>kr.motd.maven</groupId>
+                <artifactId>os-maven-plugin</artifactId>
+                <version>1.5.0.Final</version>
+            </extension>
+        </extensions>
 
-<!--    <dependency> &lt;!&ndash; necessary for Java 9+ &ndash;&gt;-->
-<!--        <groupId>org.apache.tomcat</groupId>-->
-<!--        <artifactId>annotations-api</artifactId>-->
-<!--        <version>6.0.53</version>-->
-<!--        <scope>provided</scope>-->
-<!--    </dependency>-->
-</dependencies>
+        <plugins>
+            <plugin>
+                <groupId>org.xolstice.maven.plugins</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>0.5.1</version>
+
+                <configuration>
+                    <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
+                    <pluginId>grpc-java</pluginId>
+                    <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
+                    <protoSourceRoot>src/main/proto</protoSourceRoot>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>compile-custom</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>6</source>
+                    <target>6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

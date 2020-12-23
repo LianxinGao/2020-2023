@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.glx.example";
+option java_outer_classname = "RouteGuideProto"; // 指定想要生成的Java类名。
+//option objc_class_prefix = "RTG";
+
+package com.glx.proto;
+
+service RouteGuide{
+  // 简单RPC消息
+  rpc GetFeature(Point) returns (Feature){}
+  // 服务端流（driver发送cypher，服务端不停返回结果）
+  rpc ListFeatures(Rectangle) returns (stream Feature){}
+  // 客户端流 （eg：客户端分消息发送多个字符串，服务端拼接多个消息内容后后返回一个整字符串）
+  rpc RecordRoute(stream Point) returns (RouteSummary){}
+  // 双向流式RPC （eg：聊天，长连接）
+  rpc RouteChat(stream RouteNote) returns (stream RouteNote){}
+}
+message RouteSummary{
+  int32 point_count = 1;
+  int32 feature_count = 2;
+  int32 distance = 3;
+  int32 elapsed_time = 4;
+}
+message Point {
+  int32 latitude = 1;
+  int32  longitude = 2;
+}
+message Rectangle {
+  Point p1 = 1;
+  Point p2 = 2;
+}
+message Feature {
+  string name = 1;
+  Point location = 2;
+}
+// Not used in the RPC.  Instead, this is here for the form serialized to disk.
+message FeatureDatabase {
+  repeated Feature feature = 1;
+}
+message RouteNote {
+  Point location = 1;
+  string message = 2;
+}

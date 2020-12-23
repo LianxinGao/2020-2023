@@ -1,0 +1,30 @@
+syntax = "proto3"; //定义语法，否则默认是proto2
+
+package com.glx.proto;
+
+option java_multiple_files = true; // 让定义的 service 和 message 不合并在一个文件中
+option java_package = "com.glx.grpc";
+/*
+定义服务，只允许定义四种
+1. 简单RPC， 客户端使用stub发送请求到服务器并等待响应返回，就像平常的函数调用一样
+2. 服务器端流式RPC，客户端发送请求，拿到一个流，读取直到里面没有任何消息。【方式：响应类型前加stream】
+3. 客户端流式RPC， 客户端流式写入消息，一旦完成写入，就等待服务器完成读取并返回它的响应。【方式：请求类型前加stream】
+4，双向流式RPC， 两个流独立操作，可以按任意顺序读写。
+ */
+service FileDownload {
+  rpc Download(FileDownloadRequest) returns (stream DataChunk) {}
+  rpc MessageDownload(MessageRequest) returns (MessageReply) {}
+}
+// Message 定义实体
+message DataChunk {
+  bytes data = 1; //返回消息中的数据类型为 bytes。
+}
+message FileDownloadRequest {
+  string path = 1;
+}
+message MessageRequest{
+  string data = 1;
+}
+message MessageReply{
+  string data = 1;
+}
