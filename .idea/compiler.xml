@@ -9,10 +9,15 @@
         <module name="多线程" />
         <module name="数据结构" />
         <module name="Thread" />
-        <module name="Rpc" />
+        <module name="rpc" />
         <module name="Database" />
         <module name="DataStructure" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Concurrent" target="1.5" />
+      <module name="多线程" target="1.5" />
+      <module name="数据结构" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>
