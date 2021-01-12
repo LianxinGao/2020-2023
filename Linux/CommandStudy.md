@@ -19,3 +19,7 @@ Linux/Unix的文件调用权限分三级：owner、group、other group
 nohup path-to-your-script > your-log.log 2>&1 &  
 >:重定向，2：错误输出，&1标准输出
 ```
+
+### 挂载硬盘
+1. mount [/dev/sdh]（你要挂载的硬盘） [/data5/]（你要挂到哪个目录下）
+2. 查看有哪些硬盘：lsblk 
