@@ -23,6 +23,7 @@ class UniformElement(ch: Char,
                      override val width: Int) extends Element {
   private val line = ch.toString * width
 
+
   // fill: (length)(value)
   override def contents: Array[String] = Array.fill(height)(line)
 }
