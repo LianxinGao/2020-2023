@@ -9,7 +9,8 @@ Linux/Unix的文件调用权限分三级：owner、group、other group
     2. 
 3. 解压文件
     1. tar -z(gzip|ungizp)x(extract)v(verbose显示执行过程)f(file指定文件) wenjian.tar.gz
-    
+4. 打包jar
+    1. jar -cvfM cypher-shell.jar .
 ### 查看相关
 1. ll -h  查看当前目录文件大小与权限
 
